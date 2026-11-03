@@ -39,32 +39,32 @@ Complete this one group record. Link actual issues, diffs, tests and reviews; av
 
 | Original example | Strong or Weak | Reason |
 |---|---|---|
-| changes | [select] | [response] |
-| final version | [select] | [response] |
-| Add patient search by ID | [select] | [response] |
-| fix stuff | [select] | [response] |
-| Prevent cancellation of completed appointments | [select] | [response] |
+| changes | Weak | Every commit is a change, even editing one letter. It does not say what changed or what kind of change it was. |
+| final version | Weak | It does not say what is final, what changed or what the commit contains. |
+| Add patient search by ID | Strong | It says specifically what the commit does: it adds one feature, patient search by ID. |
+| fix stuff | Weak | It is unprofessional and does not say what was fixed. "Stuff" could mean anything. |
+| Prevent cancellation of completed appointments | Strong | It clearly states the behaviour that changed, so a reviewer knows exactly what to check. |
 
 ## C Over scoped PR review
 
 A cancellation PR also renames unrelated patient fields, restructures unrelated code and adds a new dependency.
 
-- Scope concerns: [response]
-- Responsibility and architecture concerns: [response]
-- Testing and review concerns: [response]
-- Changes to remove or separate, with reasons: [response]
+- Scope concerns: The PR says it adds cancellation, so it should stick to that. Renaming patient fields, restructuring code and adding a dependency are not what the PR or its issue asked for.
+- Responsibility and architecture concerns: Renaming or moving code that other parts already use, such as registration and lookup, can break work that is already done and tested. Changes like that need to be made very carefully and on their own, not hidden inside an unrelated feature.
+- Testing and review concerns: Passing tests do not prove everything is fine. The tests may not cover the renamed fields at all. The reviewer has to compare the diff with the existing code, and when one diff mixes four unrelated jobs it is too big to check properly.
+- Changes to remove or separate, with reasons: Keep only the cancellation code, because that is what the PR and its issue are for. Remove the field renames and the restructuring; if the team really wants them, they need their own issue and their own small PR. Remove the new dependency completely, because the project must use only the Python standard library.
 
 ## D Challenge a weak Copilot review
 
 GitHub Copilot says: "Looks good; tests pass."
 
-- Missing evidence: [response]
-- Follow-up review question 1: [response]
-- Follow-up review question 2: [response]
-- Follow-up review question 3: [response]
-- Follow-up review question 4: [response]
-- Follow-up review question 5: [response]
-- Additional questions if useful: [response]
+- Missing evidence: "Looks good" gives no reasons. It does not show what was checked, which lines were looked at, or whether other code, such as other functions or branches, could be affected by the change. "Tests pass" is only a claim: Copilot cannot run the tests, so a real test run is still needed.
+- Follow-up review question 1: Which lines of the diff did you actually check?
+- Follow-up review question 2: What changes were made, and what does each change do?
+- Follow-up review question 3: Does this code affect the rest of the project? Which other functions or files use the code that was changed?
+- Follow-up review question 4: Does this change have any unwanted influence on existing behaviour, such as registration, booking or the supplied tests?
+- Follow-up review question 5: Which acceptance criteria in the linked issue did you check the change against, and which test proves each one?
+- Additional questions if useful: You said the tests pass. Which tests, and where is the actual output of the run?
 
 ## E Team workflow agreement
 
@@ -149,49 +149,49 @@ Repeat per member. Include only categories that describe actual work; write not 
 
 Why is a high commit count not necessarily evidence of strong contribution?
 
-[response]
+A commit count only shows how often someone saved, not how much or how good the work was. You could commit every tiny change, even every single line, and get a high count for very little work. Someone else could work through a file carefully and commit it once, when it is actually ready. A higher number of commits does not mean more time, effort or quality. In our team, only one member makes commits, as agreed with our tutor, so the other members' contributions show up in their reviews, issue work and testing, not in the commit count.
 
 ## L Stage 6 formative questions
 
 1. What is version control?
 
-[response]
+Version control is a system, such as Git, that records every change made to the project over time. It keeps the whole history, so if a change breaks the code, we can go back to an earlier version that we know works.
 
 2. Why is a feature branch useful?
 
-[response]
+A feature branch keeps the work in progress separate from main, which is the stable version. We can make and test one change on the branch without breaking main, and it only joins main after it has been reviewed.
 
 3. What makes a commit a good engineering commit?
 
-[response]
+A good commit contains one coherent change that is actually worth saving, and its message clearly describes what changed. That makes it easy for teammates, or anyone else, to understand what happened in that commit without opening the code.
 
 4. What is a pull request?
 
-[response]
+A pull request asks for the changes on a branch to be merged into main. It shows the diff and explains what the change does and why, so teammates can review and discuss it before it is merged.
 
 5. What is the purpose of code review?
 
-[response]
+Code review means another person checks the change before it is merged. It is not only about whether the code runs: the reviewer checks it against the requirement and acceptance criteria, looks for mistakes, weak tests and unrelated changes, and makes sure the code is readable.
 
 6. What does a Git diff show?
 
-[response]
+A diff shows exactly how the code has been modified: which lines were added and which were removed, line by line. On GitHub, added lines are shown in green and removed lines in red, with a total such as +424 −10.
 
 7. What is a Definition of Done?
 
-[response]
+A Definition of Done is the checklist the team agrees on for when a piece of work really counts as finished, not just when the code is written. For example, our issues say: the code is implemented, the tests pass with all supplied tests still passing, another member has reviewed and approved it, and it has been merged into main through a pull request.
 
 8. What is the appropriate role of GitHub Copilot in pull-request review?
 
-[response]
+Copilot is a helper, not the reviewer. It can be fast at going over a diff and pointing out small changes or possible problems that a human might take a long time to find. But the human reviewer checks the change first and records their own observations, then checks everything Copilot says against the real code, the requirement and an actual test run. Copilot cannot run the tests, and it cannot approve or merge a PR. That decision belongs to another team member.
 
 9. Why should individual contribution not be judged only by commit count?
 
-[response]
+Because a commit count only shows how often someone saved work, not what they did. It also misses work that does not create commits, such as reviewing, writing issues, testing and helping teammates. In our team, only one member commits, as agreed with our tutor, so the commit count would show almost all the work as coming from one person, even though the others review and test.
 
 10. What is the Stage 6 engineering rule?
 
-[response]
+Every change follows the same path: requirement, issue, feature branch, code and tests, commit, pull request, review by another member, and then merge. Nothing goes straight into main, so main always stays a stable, reviewed version that the whole team can trust.
 
 ## M Completion and handover
 
