@@ -6,34 +6,34 @@
 
 Complete this one group record. Link actual issues, diffs, tests and reviews; avoid copying entire histories. Blank fields are intentional. Duplicate rows as needed. Use synthetic data only. Every member records their own meaningful contribution. Do not invent results, reviews or Copilot use.
 
-- Group/tutorial: [response]
-- Members, GitHub usernames and cohorts: [response]
-- Repository URL: [response]
-- Starting SHA: [response]
+- Group/tutorial: Group 4, tutorial [response]
+- Members, GitHub usernames and cohorts: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG)
+- Repository URL: https://github.com/Emmanuel07-code/st1-assignment-3
+- Starting SHA: 5f28e1d
 
 ## A Requirement to issue activities
 
 ### FR-02 Patient Search
 
-- Title: [response]
-- Context: [response]
-- Requirement: [response]
-- Acceptance criteria: [response]
-- Scope: [response]
-- Definition of Done: [response]
-- Owner: [response]
-- Actual issue link: [response]
+- Title: FR-02 Patient search by ID
+- Context: Every patient has an ID so the system can identify them. If you have a patient's ID, you should be able to get that exact patient back.
+- Requirement: FR-02 Patient Search: PatientService.find_patient(patient_id)
+- Acceptance criteria: A registered ID returns the stored patient (the same object, not a copy). A valid ID that is not registered raises LookupError. A blank ID raises ValueError. IDs are trimmed and case-sensitive. A failed lookup does not create a new patient.
+- Scope: Lookup by ID only. No search by name: two patients can share a name, but each ID is unique. Adding, editing or removing patients is not part of this issue.
+- Definition of Done: find_patient implemented in services.py; tests in tests/test_services.py pass with all supplied tests still passing; reviewed and approved by another team member; merged into main through a pull request.
+- Owner: Emmanuel Cadman (Emmanuel07-code)
+- Actual issue link: https://github.com/Emmanuel07-code/st1-assignment-3/issues/2
 
 ### FR-06 Appointment Cancellation with FR-07 retained history
 
-- Title: [response]
-- Context: [response]
-- Requirement: [response]
-- Acceptance criteria: [response]
-- Scope: [response]
-- Definition of Done: [response]
-- Owner: [response]
-- Actual issue link: [response]
+- Title: FR-06/FR-07 Cancel appointment and keep its history
+- Context: Sometimes an appointment will not happen anymore and needs to be cancelled. Instead of deleting it, we keep it, so there is still a record that the appointment existed and was cancelled.
+- Requirement: FR-06 Appointment Cancellation and FR-07 Retained History: AppointmentService.cancel_appointment(appointment_id)
+- Acceptance criteria: Cancelling a SCHEDULED appointment changes its status to CANCELLED. The method returns the same stored appointment object. The cancelled appointment can still be found by ID and still appears in the appointment list. Cancelling an appointment that is already CANCELLED, or that is COMPLETED, raises ValueError and its status does not change. A valid ID that does not exist raises LookupError; a blank ID raises ValueError. A cancelled appointment no longer blocks that practitioner's time slot.
+- Scope: Only SCHEDULED appointments can be cancelled, through Appointment.cancel(). No deleting appointments, no rescheduling and no notifications.
+- Definition of Done: cancel_appointment implemented in services.py; tests in tests/test_services.py and tests/test_domain.py pass with all supplied tests still passing; reviewed and approved by another team member; merged into main through a pull request.
+- Owner: Emmanuel Cadman (Emmanuel07-code)
+- Actual issue link: https://github.com/Emmanuel07-code/st1-assignment-3/issues/3
 
 ## B Commit quality
 
@@ -83,19 +83,20 @@ Create at least two focused issues. Add a linked practitioner-lookup issue or an
 
 | Issue link | Requirement | Owner | Acceptance criteria or precise link | Status |
 |---|---|---|---|---|
-| [issue 1] | [response] | [response] | [response] | [response] |
-| [issue 2] | [response] | [response] | [response] | [response] |
+| [#2](https://github.com/Emmanuel07-code/st1-assignment-3/issues/2) | FR-02 Patient Search | Emmanuel Cadman | [Acceptance criteria in #2](https://github.com/Emmanuel07-code/st1-assignment-3/issues/2) | Open, linked to PR #1 |
+| [#3](https://github.com/Emmanuel07-code/st1-assignment-3/issues/3) | FR-06 Appointment Cancellation with FR-07 retained history | Emmanuel Cadman | [Acceptance criteria in #3](https://github.com/Emmanuel07-code/st1-assignment-3/issues/3) | Open, linked to PR #1 |
+| [#4](https://github.com/Emmanuel07-code/st1-assignment-3/issues/4) | Supporting practitioner lookup over FR-03 registrations | Emmanuel Cadman | [Acceptance criteria in #4](https://github.com/Emmanuel07-code/st1-assignment-3/issues/4) | Open, linked to PR #1 |
 
 ## G Pull request evidence
 
 Repeat this block per PR. Record actual events, not planned approvals.
 
-- PR link and title: [response]
-- Linked issue and requirement: [response]
-- Feature branch: [response]
-- Changed behaviour: [response]
-- Meaningful commits: [links]
-- Test command, directory and observed result: [response]
+- PR link and title: [#1](https://github.com/Emmanuel07-code/st1-assignment-3/pull/1) Stage 6: patient/practitioner lookup and appointment cancellation
+- Linked issue and requirement: #2 FR-02, #3 FR-06/FR-07, #4 practitioner lookup (supporting, FR-03)
+- Feature branch: feature/stage6-services
+- Changed behaviour: PatientService.find_patient and PractitionerService.find_practitioner return the stored object, raising LookupError when absent and ValueError for a blank ID. AppointmentService.cancel_appointment cancels through Appointment.cancel(), returns the same object and keeps it stored. New tests/test_services.py and tests/test_domain.py.
+- Meaningful commits: [ede66ac](https://github.com/Emmanuel07-code/st1-assignment-3/commit/ede66ac)
+- Test command, directory and observed result: python -m pytest, run from project/, 45 passed (Python 3.14.7, pytest 8.3.5), on branch feature/stage6-services at ede66ac. Baseline on main before the change: 8 passed.
 - Another-member reviewer: [response]
 - Human observations recorded before Copilot: [link and time]
 - Requirement, responsibilities, test assertions and unrelated-scope checks: [response]
@@ -103,7 +104,7 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Author response/change and verification: [response]
 - Reviewer recheck and approval: [link]
 - Merge outcome and SHA: [response]
-- Significant Copilot assistance: [summary or none]
+- Significant Copilot assistance: Copilot not used for the implementation. The code and tests were drafted with an AI assistant (Claude), then checked and run by Emmanuel Cadman; disclosed in PR #1.
 - Linked issue closure: [response]
 - Each member updated main: [member and confirmation]
 - Integrated verification after merge: [command, directory, result and code SHA]
@@ -194,10 +195,10 @@ Why is a high commit count not necessarily evidence of strong contribution?
 
 ## M Completion and handover
 
-- Starting SHA: [response]
+- Starting SHA: 5f28e1d
 - Final Stage 6 code SHA: [response]
-- Test command: [response]
-- Working directory: [response]
+- Test command: python -m pytest
+- Working directory: project/
 - Observed result: [response]
 - PR and another-member reviewer: [links]
 - Unresolved issue or none: [response]
