@@ -1,5 +1,9 @@
 # Stage 6 activities and evidence
 
+> **TEAM TO COMPLETE — status note (remove when the record is done)**
+> The three Stage 6 service methods are implemented in `project/smartcare/services.py` and checked by `project/tests/test_services.py`. Every `[response]` field below is still blank on purpose. Issues, the workflow agreement (E), human review observations, Copilot use (H, I), contributions (J), quiz answers (L) and all SHAs must be written by your own members from your own work and accounts. Do not fill them with text you did not produce.
+
+
 Complete this one group record. Link actual issues, diffs, tests and reviews; avoid copying entire histories. Blank fields are intentional. Duplicate rows as needed. Use synthetic data only. Every member records their own meaningful contribution. Do not invent results, reviews or Copilot use.
 
 - Group/tutorial: [response]
