@@ -1,5 +1,9 @@
 # Stage 7 Testing and Verification Record
 
+> **TEAM TO COMPLETE — status note (remove when the record is done)**
+> `project/tests/test_domain.py` was added and `project/tests/test_services.py` extended. TEST IDs, the traceability matrix (B–G), the human-first Copilot design (H, I), regression counts at your own SHA (J), review/contribution evidence (L, M) and quiz answers (N) are left blank for your group. Assign your own TEST IDs and record results you actually observe.
+
+
 Group/tutorial: [complete]  Members/cohorts: [complete]
 Requirements baseline: SmartCare A3 Requirements Baseline 2026, revision 2.
 Use the same project/. Link actual evidence; keep responses concise. Blank fields are for your group. Copy rows only as needed.
