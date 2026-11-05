@@ -29,15 +29,13 @@ class PatientService:
         return patient
 
     def find_patient(self, patient_id: str) -> Patient:
-        """Return the stored patient for a valid patient ID.
+        """Stage 6 TODO: return the stored patient for a valid patient ID.
 
         Completion must raise LookupError for absence and ValueError for
         a blank/invalid ID. It must not create a replacement patient.
+        The starter deliberately raises NotImplementedError.
         """
-        patient = self.data_store.find_patient(patient_id)
-        if patient is None:
-            raise LookupError('Patient not found')
-        return patient
+        raise NotImplementedError('Stage 6: patient lookup')
 
 
 class PractitionerService:
@@ -66,16 +64,14 @@ class PractitionerService:
         return practitioner
 
     def find_practitioner(self, practitioner_id: str) -> Practitioner:
-        """Return the stored practitioner for a valid ID.
+        """Stage 6 TODO: return the stored practitioner for a valid ID.
 
         Completion must raise LookupError for absence and ValueError for
         a blank/invalid ID. It must not create a replacement
-        practitioner.
+        practitioner. The starter deliberately raises
+        NotImplementedError.
         """
-        practitioner = self.data_store.find_practitioner(practitioner_id)
-        if practitioner is None:
-            raise LookupError('Practitioner not found')
-        return practitioner
+        raise NotImplementedError('Stage 6: practitioner lookup')
 
 
 class AppointmentService:
@@ -137,14 +133,13 @@ class AppointmentService:
         return appointment
 
     def cancel_appointment(self, appointment_id: str) -> Appointment:
-        """Cancel through the domain method and retain the appointment.
+        """Stage 6: cancel through the domain method and retain the
+        appointment.
 
         Return the cancelled object. Unknown IDs raise LookupError;
         invalid transitions raise ValueError and leave state unchanged.
         """
-        appointment = self.find_appointment(appointment_id)
-        appointment.cancel()
-        return appointment
+        raise NotImplementedError('Stage 6: appointment cancellation')
 
     def list_practitioner_appointments(
         self,
