@@ -5,12 +5,12 @@ Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves 
 
 ## Group index
 
-- Group and tutorial: [complete]
-- Member names, GitHub usernames and UG/PG cohorts: [complete]
-- Shared repository URL: [complete]
-- Latest completed stage: [complete]
-- Verified code SHA: [complete]
-- Test command, working directory and observed result: [complete]
+- Group and tutorial: Group 4, Computer Lab 09 (Friday 08:30–10:30)
+- Member names, GitHub usernames and UG/PG cohorts: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG)
+- Shared repository URL: https://github.com/Emmanuel07-code/st1-assignment-3
+- Latest completed stage: Stage 7
+- Verified code SHA: 84f40f2
+- Test command, working directory and observed result: python -m pytest, run from project/, 45 passed
 - Final submitted SHA, if different from tested code SHA: [complete; explain evidence-only changes]
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
