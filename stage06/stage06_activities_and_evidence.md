@@ -1,12 +1,8 @@
 # Stage 6 activities and evidence
 
-> **TEAM TO COMPLETE — status note (remove when the record is done)**
-> The three Stage 6 service methods are implemented in `project/smartcare/services.py` and checked by `project/tests/test_services.py`. Every `[response]` field below is still blank on purpose. Issues, the workflow agreement (E), human review observations, Copilot use (H, I), contributions (J), quiz answers (L) and all SHAs must be written by your own members from your own work and accounts. Do not fill them with text you did not produce.
-
-
 Complete this one group record. Link actual issues, diffs, tests and reviews; avoid copying entire histories. Blank fields are intentional. Duplicate rows as needed. Use synthetic data only. Every member records their own meaningful contribution. Do not invent results, reviews or Copilot use.
 
-- Group/tutorial: Group 4, tutorial [response]
+- Group/tutorial: Group 4, Computer Lab 09 (Friday 08:30–10:30)
 - Members, GitHub usernames and cohorts: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG)
 - Repository URL: https://github.com/Emmanuel07-code/st1-assignment-3
 - Starting SHA: 5f28e1d
@@ -70,12 +66,12 @@ GitHub Copilot says: "Looks good; tests pass."
 
 | Practice | Team agreement |
 |---|---|
-| Branch naming | [response] |
-| Commit message convention | [response] |
-| PR size | [response] |
-| Another-member review requirement | [response] |
-| Merge rule | [response] |
-| Significant Copilot disclosure rule | [response] |
+| Branch naming | We follow the naming used in the handouts: feature/stageN-short-name for new work (for example feature/stage6-services) and debug/stageN for Stage 8 fault work. |
+| Commit message convention | A short, simple message that says what changed, for example "Add Stage 6 activity and quiz answers". |
+| PR size | One focused PR per stage, linked to that stage's issues, small enough for a teammate to review the whole diff. |
+| Another-member review requirement | At least one other member reviews the actual diff and approves the PR on GitHub before it is merged. Self-review does not count. |
+| Merge rule | To avoid clashes, Emmanuel handles commits and merges for the group, as agreed with our teacher. Teammates share their work with him, and a PR is merged once another member has approved it and the full test suite passes. |
+| Significant Copilot disclosure rule | Any significant help from Copilot or another AI tool is disclosed in the PR description and in the stage record. |
 
 ## F Issue and backlog index
 
@@ -97,44 +93,62 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Changed behaviour: PatientService.find_patient and PractitionerService.find_practitioner return the stored object, raising LookupError when absent and ValueError for a blank ID. AppointmentService.cancel_appointment cancels through Appointment.cancel(), returns the same object and keeps it stored. New tests/test_services.py and tests/test_domain.py.
 - Meaningful commits: [ede66ac](https://github.com/Emmanuel07-code/st1-assignment-3/commit/ede66ac)
 - Test command, directory and observed result: python -m pytest, run from project/, 45 passed (Python 3.14.7, pytest 8.3.5), on branch feature/stage6-services at ede66ac. Baseline on main before the change: 8 passed.
-- Another-member reviewer: [response]
-- Human observations recorded before Copilot: [link and time]
-- Requirement, responsibilities, test assertions and unrelated-scope checks: [response]
-- Key feedback: [response]
-- Author response/change and verification: [response]
-- Reviewer recheck and approval: [link]
-- Merge outcome and SHA: [response]
+- Another-member reviewer: TanveerUppal (review and approval). Tanzir1718 also reviewed and commented.
+- Human observations recorded before Copilot: TanveerUppal's inline review comments on project/smartcare/services.py in [PR #1](https://github.com/Emmanuel07-code/st1-assignment-3/pull/1), 3 Nov 2026.
+- Requirement, responsibilities, test assertions and unrelated-scope checks: find_patient meets FR-02 and returns the correct stored patient. find_practitioner reuses the same lookup logic: the data store retrieves the data and the service coordinates the workflow, raising a LookupError when the practitioner is not found. cancel_appointment finds the appointment, uses the domain method Appointment.cancel() and returns the cancelled appointment, so the cancellation rule stays inside the Appointment class (encapsulation). No unrelated changes were raised.
+- Key feedback: "Everything is well-implemented ... It is all ready to be merged." Later, on 5 Nov, TanveerUppal added: "Team review need to be added in the stage 6 file before merge: its missing" (bug label added).
+- Author response/change and verification: The team review was added to this record (sections G, H and I). One reviewer comment said a blank patient ID gives a lookup error; we checked the code and tests: a blank ID raises ValueError and an unknown ID raises LookupError (Stage 7 tests T-19, T-17 and T-18 confirm this).
+- Reviewer recheck and approval: TanveerUppal approved PR #1 on 3 Nov 2026 and approved again on 5 Nov 2026 with a combined review.
+- Merge outcome and SHA: Merged into main by Tanzir1718 as 424c524 (4 Nov). Reverted by PR #5 (d450a0a, 5 Nov) because the team review was missing from this record. Restored by PR #6 as 84f40f2 (5 Nov).
 - Significant Copilot assistance: Copilot not used for the implementation. The code and tests were drafted with an AI assistant (Claude), then checked and run by Emmanuel Cadman; disclosed in PR #1.
-- Linked issue closure: [response]
-- Each member updated main: [member and confirmation]
-- Integrated verification after merge: [command, directory, result and code SHA]
+- Linked issue closure: #2, #3 and #4 closed by PR #1.
+- Each member updated main: Emmanuel Cadman pulled main at 84f40f2 on 5 Nov. [other members]
+- Integrated verification after merge: python -m pytest, run from project/, 45 passed, main at 84f40f2.
 
 ## H Copilot collaboration record
 
 Record meaningful required use, not every trivial completion. Repeat per significant interaction.
 
-- Member and task: [response]
-- Prompt/purpose and relevant issue/diff: [response]
-- Summary of output: [response]
-- Human check against actual code, requirements and tests: [response]
-- Decision — Accept / Modify / Reject: [select]
-- Reason: [response]
-- Verification/evidence: [link and result]
+- Member and task: Tanveer Uppal, Copilot review of the PR #1 diff and tests after his own human review.
+- Prompt/purpose and relevant issue/diff: [prompt to add from Tanveer]. Purpose: a second check of PR #1 (issues #2, #3, #4) after the human review.
+- Summary of output: Verdict "Stage 6 appears complete and correctly implemented" and Approve. It listed the requirements as satisfied (return the stored patient, LookupError if absent, no replacement patient, blank or invalid IDs handled) and pointed to tests such as test_find_unknown_patient_raises_lookup_error, test_blank_patient_id_lookup_raises_value_error and test_failed_patient_lookup_does_not_add_a_patient. Two minor comments: duplicate docstrings, and a request to confirm the NotImplementedError placeholders were removed.
+- Human check against actual code, requirements and tests: We opened services.py. Each method has only one docstring, so the duplicate docstring comment is wrong; Copilot seems to have read the removed and added lines of the diff as if both were still there. The Stage 6 NotImplementedError lines are gone; the only one left is the Stage 9 placeholder, which is meant to stay until Stage 9. The full suite passes (45 passed).
+- Decision — Accept / Modify / Reject: Accept the approval; reject the duplicate docstring comment; placeholder concern checked, no change needed.
+- Reason: The approval matches our own review and the test results. The docstring comment does not match the real file, and the placeholder concern was an assumption that we checked ourselves.
+- Verification/evidence: services.py on main at 84f40f2; python -m pytest from project/, 45 passed.
 
 ## I Human versus Copilot review comparison
 
-- Human reviewer noticed before consulting Copilot: [response]
-- Copilot noticed: [response]
-- Overlap: [response]
-- What did the human reviewer notice that Copilot did not: [response]
-- What did Copilot identify that the human reviewer initially missed: [response]
-- Unsupported or incorrect Copilot suggestion: [response or none identified with explanation]
-- Human judgement accepted, modified or rejected, and why: [response]
-- Which evidence justified merge approval: [response]
+- Human reviewer noticed before consulting Copilot: In handwritten notes and three inline comments on services.py, Tanveer noted that find_patient returns the correct stored patient; find_practitioner reuses the same logic (the data store retrieves, the service coordinates) and raises a LookupError when the practitioner is not found; and cancel_appointment finds the appointment, uses the domain method appointment.cancel() and returns it, keeping the rule inside the Appointment class.
+- Copilot noticed: All three Stage 6 operations are implemented, and specific tests prove each rule, including that a blank ID raises ValueError and a failed lookup does not create a patient.
+- Overlap: Both found that the lookups return the stored objects and raise errors for missing IDs, that cancellation goes through the domain cancel() method, and both approved.
+- What did the human reviewer notice that Copilot did not: The design reasons: the data store and service have separate responsibilities, and cancellation follows encapsulation. The human also reviewed the actual changed lines, so did not need to guess whether the placeholders were removed.
+- What did Copilot identify that the human reviewer initially missed: The difference between a blank ID and an unknown ID. The human comment said a blank patient ID gives a lookup error, but it actually raises ValueError, which Copilot linked to test_blank_patient_id_lookup_raises_value_error. Copilot also connected each rule to a named test.
+- Unsupported or incorrect Copilot suggestion: The duplicate docstring comment is incorrect, because each method has one docstring. The placeholder comment was unsupported, because Copilot assumed instead of checking; we checked and only the Stage 9 placeholder remains.
+- Human judgement accepted, modified or rejected, and why: Accepted, with one correction: blank IDs raise ValueError, not LookupError. The human review was based on the real diff and matches the passing tests.
+- Which evidence justified merge approval: TanveerUppal's review of the actual diff and his GitHub approval, the linked issues #2, #3 and #4, and the full suite passing (45 passed).
 
 ## J Contributions
 
 Repeat per member. Include only categories that describe actual work; write not applicable where appropriate. Pairing or mentoring can be supported by a short corroborated note.
+
+- Member: Emmanuel Cadman (Emmanuel07-code)
+- Implementation: Brought the three Stage 6 service methods into services.py on feature/stage6-services (commit ede66ac, PR #1).
+- Testing: Added tests/test_services.py and tests/test_domain.py and ran the full suite (45 passed).
+- Review: Not applicable (author of PR #1). Checked the reviewer's comments and corrected the blank ID point (see G).
+- Issue refinement: Wrote issues #2, #3 and #4.
+- Design and responsibility discussion: Not applicable.
+- Debugging or integration: Managed the branch, commits and PR. Restored the Stage 6 work after the revert (PR #6) and re-ran the suite on main (45 passed at 84f40f2).
+- Documentation or team support: Completed this record's activities and quiz answers (B, C, D, K, L) and wrote up the team agreement (E).
+
+- Member: [response]
+- Implementation: [work and evidence]
+- Testing: [work and evidence]
+- Review: [work and evidence]
+- Issue refinement: [work and evidence]
+- Design and responsibility discussion: [work and evidence]
+- Debugging or integration: [work and evidence]
+- Documentation or team support: [work and evidence]
 
 - Member: [response]
 - Implementation: [work and evidence]
@@ -196,13 +210,13 @@ Every change follows the same path: requirement, issue, feature branch, code and
 ## M Completion and handover
 
 - Starting SHA: 5f28e1d
-- Final Stage 6 code SHA: [response]
+- Final Stage 6 code SHA: 84f40f2 (first merged as 424c524, restored as 84f40f2 after the PR #5 revert)
 - Test command: python -m pytest
 - Working directory: project/
-- Observed result: [response]
-- PR and another-member reviewer: [links]
-- Unresolved issue or none: [response]
-- Stage 7 handover status: [ready for tutor checkpoint / unresolved work]
+- Observed result: 45 passed, 0 failed
+- PR and another-member reviewer: [PR #1](https://github.com/Emmanuel07-code/st1-assignment-3/pull/1), reviewed and approved by TanveerUppal; restored by [PR #6](https://github.com/Emmanuel07-code/st1-assignment-3/pull/6)
+- Unresolved issue or none: None
+- Stage 7 handover status: Ready for tutor checkpoint
 - Final submitted SHA if later than tested SHA: [response and evidence-only difference]
 
 - [ ] Three Stage 6 service targets completed and checked.

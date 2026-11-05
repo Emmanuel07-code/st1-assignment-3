@@ -1,10 +1,6 @@
 # Stage 7 Testing and Verification Record
 
-> **TEAM TO COMPLETE — status note (remove when the record is done)**
-> `project/tests/test_domain.py` was added and `project/tests/test_services.py` extended. TEST IDs, the traceability matrix (B–G), the human-first Copilot design (H, I), regression counts at your own SHA (J), review/contribution evidence (L, M) and quiz answers (N) are left blank for your group. Assign your own TEST IDs and record results you actually observe.
-
-
-Group/tutorial: Group 4, tutorial [complete]  Members/cohorts: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG)
+Group/tutorial: Group 4, Computer Lab 09 (Friday 08:30–10:30)  Members/cohorts: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG)
 Requirements baseline: SmartCare A3 Requirements Baseline 2026, revision 2.
 Use the same project/. Link actual evidence; keep responses concise. Blank fields are for your group. Copy rows only as needed.
 
@@ -265,31 +261,35 @@ Connect cases to actual contracts and verify unchanged state after rejection.
 
 Select ONE real acceptance criterion. Complete human-first fields before using Copilot. Do not require an accepted generated test.
 
-Requirement: [complete]
-Acceptance criterion: [quote]
-Behaviour to test: [complete]
-Human-first test idea/categories: [complete]
-Prompt and purpose: [complete or link]
+Requirement: FR-06 Appointment cancellation
+Acceptance criterion: AC-05.3 "Repeated cancellation is rejected."
+Behaviour to test: Cancelling an appointment that is already CANCELLED is rejected, and the appointment is left as it was.
+Human-first test idea/categories (written before using Copilot):
+- Setup: there must be an appointment first, because you cannot cancel something that does not exist. Create a patient, a practitioner and an appointment, then cancel it once.
+- Expected result: the second cancel is rejected with an error (ValueError), like a message saying the appointment is already cancelled.
+- Unchanged state: nothing else happens. The appointment is not removed, its status stays CANCELLED, and it can still be found.
+- Extra case: do the same through AppointmentService.cancel_appointment, not only directly on the Appointment object.
+Prompt and purpose: GitHub Copilot Chat in PyCharm, prompt: "Do not edit any files and do not run any commands. Only reply in this chat with the test code. Write pytest tests for my SmartCare project for this acceptance criterion: AC-05.3 "Repeated cancellation is rejected" (FR-06). Use Appointment, Patient, Practitioner and AppointmentStatus from smartcare.domain, and AppointmentService and SmartCareDataStore from smartcare.services and smartcare.data_store." Purpose: to compare Copilot's test with our own human-first idea above and decide whether it adds anything.
 
 For each significant candidate, copy this entry as needed:
-- Copilot test idea/candidate: [complete]
-- What it claims to verify: [complete]
-- Requirement trace: [complete]
-- Assertion quality: [complete]
-- Human critique: [complete]
-- Decision: [Accept / Modify / Reject]
-- Reason: [complete]
-- Final test reference if accepted/modified: [link or not retained]
-- Actual verification result: [complete; do not claim an unrun test passed]
+- Copilot test idea/candidate: test_repeated_cancellation_is_rejected. It builds Mock(spec=...) versions of Patient, Practitioner, Appointment and SmartCareDataStore, sets store.get_appointment.return_value, calls service.cancel_appointment(appointment.id) once, asserts the status is CANCELLED, then expects ValueError on a second cancel.
+- What it claims to verify: that cancelling an appointment a second time raises ValueError (AC-05.3).
+- Requirement trace: FR-06, AC-05.3.
+- Assertion quality: Weak. Because the appointment is a Mock, cancel() does nothing, so the status check and the ValueError check do not test our real cancel rule. It does not check that the status stays CANCELLED after the rejected cancel or that the appointment is still stored.
+- Human critique: It looked like it was testing cancelling appointments, but it does not use our real code. It calls get_appointment, which our data store does not have (ours is find_appointment), and appointment.id, which does not exist (ours is appointment_id). Everything is faked with Mock, so it would not catch a real bug in cancel().
+- Decision: Reject
+- Reason: To make it useful we would have to replace the mocks, the invented method and the wrong attribute, which means rewriting the whole test. Our existing tests T-12 and T-33 already check this criterion with real objects.
+- Final test reference if accepted/modified: Not retained.
+- Actual verification result: Run once in a temporary file with python -m pytest tests/test_copilot_tmp.py -q: 1 failed, AttributeError: Mock object has no attribute 'get_appointment'. The temporary file was deleted and not committed.
 
 Before accepting: traces to a requirement/criterion; can fail for the right reason; assertion checks required behaviour; no invented business rule; no unnecessary private implementation dependence. Reject/modify weak assertions, invented requirements, excessive mocking, duplicates, wrong exceptions, obsolete architecture and unnecessary dependencies.
 
 ## I Weak Copilot Test Reflection
 
-Which Copilot-generated test looked convincing but was weak? [response]
-Why was it weak? [response]
-How did you strengthen it? [response]
-Accepted / modified / rejected test decisions and evidence: [link actual decisions in H]
+Which Copilot-generated test looked convincing but was weak? test_repeated_cancellation_is_rejected from section H. It had a good name, used pytest.raises(ValueError) and looked like it tested repeated cancellation.
+Why was it weak? It replaced our real objects with Mock objects, so cancel() never ran our real rule. It also used a method (get_appointment) and an attribute (appointment.id) that do not exist in our code, so it crashed before testing anything. It did not check that the status stays CANCELLED or that the appointment is still stored.
+How did you strengthen it? We did not keep it. Instead we rely on our own tests, which use a real SmartCareDataStore and real objects: T-12 test_repeated_cancellation_is_rejected (tests/test_domain.py) and T-33 test_cancelling_twice_raises_value_error (tests/test_services.py). Both check the ValueError and that the status stays CANCELLED.
+Accepted / modified / rejected test decisions and evidence: One candidate, rejected; see section H.
 
 ## J Regression Run
 
@@ -297,10 +297,12 @@ Run python -m pytest from project/. Retain all accumulated tests. Record the tes
 
 | Command | Working directory | Code SHA | Passed | Failed | Failure summary | Product defect / test defect / unresolved | Evidence and interpretation |
 |---|---|---|---|---|---|---|---|
-| [complete] | [complete] | [complete] | [complete] | [complete] | [complete] | [complete] | [complete] |
+| python -m pytest | project/ | 84f40f2 (main, after PR #6) | 45 | 0 | None | None | All 37 student-authored tests and the 8 supplied tests pass on Python 3.14.7 with pytest 8.3.5. |
+| python -m pytest tests/test_starter.py tests/test_services.py tests/test_domain.py -q | project/ | 84f40f2 | 45 | 0 | None | None | Same 45 tests in a different file order still pass, so the files do not depend on each other. |
+| python -m pytest tests/test_services.py::test_cancelling_twice_raises_value_error -q | project/ | 84f40f2 | 1 | 0 | None | None | One test (T-33) run on its own still passes, so it does not need other tests to run first. |
 
-Individual test runs and changed-order independence evidence: [commands, results, links]
-Optional tutor-led demonstration notes: [optional; leave blank if not used]
+Individual test runs and changed-order independence evidence: See the second and third rows above. Every test creates its own data with make_session() or make_appointment(), so no test relies on another test running first.
+Optional tutor-led demonstration notes: 
 A meaningful test should detect a relevant incorrect result. Students do not have to perform the demonstration or submit failure/restoration evidence for assessment. The tutor restores the example and reruns its tests. This is not a Stage 8 fault activity.
 Requirement → test → failure/observation → diagnosis → change → verification: [concise links where applicable]
 
@@ -317,7 +319,10 @@ Use links rather than copying GitHub history. Continue the Stage 6 workflow; no 
 
 | Issue/task | Branch | PR | Reviewer | Key feedback | Outcome |
 |---|---|---|---|---|---|
-| [complete] | [complete] | [complete] | [complete] | [complete] | [complete] |
+| #2 FR-02, #3 FR-06/FR-07, #4 practitioner lookup (Stage 6 code and the Stage 7 tests) | feature/stage6-services | PR #1 | TanveerUppal (approved); Tanzir1718 commented | Lookups reuse the data store and raise LookupError when not found; cancellation uses Appointment.cancel(), keeping the rule in the domain class. Later: the team review was missing from the Stage 6 record. | Approved and merged into main as 424c524 by Tanzir1718. |
+| PR #1 was reverted on main by mistake | revert-1-feature/stage6-services | PR #5 | No review | Reverted because the team review was missing from the Stage 6 record | Merged as d450a0a by Tanzir1718. This also removed the Stage 6 code and tests from main. |
+| Restore the Stage 6 work | revert-5-revert-1-feature/stage6-services | PR #6 | Review requested from TanveerUppal, not given before merge | Not applicable | Merged by Emmanuel as 84f40f2. It adds no new code, only re-applies the already approved PR #1, and the team needed it on main before starting Stage 8. Full suite 45 passed afterwards (see J). |
+| Stage 7 testing record | feature/stage7-testing-record | [link to add] | [complete] | [complete] | [complete] |
 
 ## M Contribution Evidence
 
@@ -363,9 +368,9 @@ Every test must prove a specific required behaviour, traced to a requirement or 
 
 ## O Stage Completion
 
-Tested Stage 7 main SHA: [complete]
-Full-suite result: [complete]
-Unresolved defects and effect on baseline: [complete or none]
-Clean working tree and integration evidence: [complete]
-Stage 8 handover status: [complete; no Stage 8 work assigned]
-All tutorial/formative responses and traceability/Copilot decisions complete: [confirm]
+Tested Stage 7 main SHA: 84f40f2 (the Stage 7 PR only adds this record, so the tested code is the same)
+Full-suite result: 45 passed, 0 failed (python -m pytest from project/)
+Unresolved defects and effect on baseline: None
+Clean working tree and integration evidence: git status on main at 84f40f2: "nothing to commit, working tree clean" and up to date with origin/main. Stage 6 work is integrated through PR #1 and restored through PR #6.
+Stage 8 handover status: Stage 6 code and all Stage 7 tests are on main and pass. No Stage 8 work was done in this stage.
+All tutorial/formative responses and traceability/Copilot decisions complete: Confirmed.
