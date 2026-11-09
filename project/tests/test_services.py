@@ -258,3 +258,55 @@ def test_cancel_only_changes_the_chosen_appointment() -> None:
     )
     appointment_service.cancel_appointment('A1')
     assert other.status is AppointmentStatus.SCHEDULED
+
+
+# Stage 9: practitioner listing
+
+
+def test_listing_default_includes_cancelled_history() -> None:
+    """FR-09 / FR-07: all statuses are listed, ordered by time."""
+    _, _, _, appointment_service = make_session()
+    late = appointment_service.book_appointment(
+        'A2', 'P1', 'D1', datetime(2026, 10, 1, 10, 0),
+    )
+    early = appointment_service.book_appointment(
+        'A1', 'P1', 'D1', datetime(2026, 10, 1, 9, 0),
+    )
+    appointment_service.cancel_appointment('A1')
+    result = appointment_service.list_practitioner_appointments('D1')
+    assert result == [early, late]
+    assert early.status is AppointmentStatus.CANCELLED
+
+
+def test_listing_with_status_filter() -> None:
+    """FR-09: an explicit status returns only matching appointments."""
+    _, _, _, appointment_service = make_session()
+    appointment_service.book_appointment(
+        'A1', 'P1', 'D1', datetime(2026, 10, 1, 9, 0),
+    )
+    appointment_service.cancel_appointment('A1')
+    assert appointment_service.list_practitioner_appointments(
+        'D1', AppointmentStatus.SCHEDULED,
+    ) == []
+
+
+def test_listing_known_practitioner_with_no_bookings_is_empty() -> None:
+    """A known practitioner with no appointments gives an empty list."""
+    _, _, _, appointment_service = make_session()
+    assert appointment_service.list_practitioner_appointments('D1') == []
+
+
+def test_listing_unknown_practitioner_raises_lookup_error() -> None:
+    """An unknown practitioner is absent, not empty."""
+    _, _, _, appointment_service = make_session()
+    with pytest.raises(LookupError):
+        appointment_service.list_practitioner_appointments('D9')
+
+
+def test_listing_invalid_status_or_blank_id_raises_value_error() -> None:
+    """A text status or blank ID is invalid input."""
+    _, _, _, appointment_service = make_session()
+    with pytest.raises(ValueError):
+        appointment_service.list_practitioner_appointments('D1', 'scheduled')
+    with pytest.raises(ValueError):
+        appointment_service.list_practitioner_appointments('  ')

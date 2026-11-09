@@ -5,7 +5,7 @@ import re
 from datetime import datetime
 
 from smartcare.data_store import SmartCareDataStore
-from smartcare.domain import Appointment
+from smartcare.domain import Appointment, AppointmentStatus
 from smartcare.services import (
     AppointmentService,
     PatientService,
@@ -69,11 +69,110 @@ def run_demo() -> None:
     print('Session-only data: records are lost on exit.')
 
 
-def run_menu() -> None:
-    """Stage 9: implement the register/find/book/cancel/list/exit menu.
+MENU = """
+MAIN MENU
+[1] Register patient
+[2] Find patient
+[3] Register practitioner
+[4] Find practitioner
+[5] Book appointment
+[6] Cancel appointment
+[7] Find appointment
+[8] List practitioner appointments
+[0] Exit"""
 
-    Call services, recover from expected input errors, and keep this
-    session's data until exit. main.py reports the incomplete menu
-    without crashing.
+
+def parse_status(text: str) -> AppointmentStatus | None:
+    """Return None for blank text, else the matching status; raise
+    ValueError for any other text.
     """
-    raise NotImplementedError('Stage 9 interactive menu is not yet completed')
+    if not text.strip():
+        return None
+    try:
+        return AppointmentStatus(text.strip().lower())
+    except ValueError:
+        raise ValueError(
+            'Status must be scheduled, cancelled or completed',
+        ) from None
+
+
+def run_menu() -> None:
+    """Run the register/find/book/cancel/list/exit menu.
+
+    Uses one shared store until exit. Expected input errors are shown
+    and the menu continues.
+    """
+    data_store = SmartCareDataStore()
+    patients = PatientService(data_store)
+    practitioners = PractitionerService(data_store)
+    appointments = AppointmentService(data_store)
+    print('SMARTCARE Interactive Console')
+    print('Session data is temporary and will be discarded when you exit.')
+    while True:
+        print(MENU)
+        choice = input('Select an option: ').strip()
+        try:
+            if choice == '0':
+                print('Goodbye. Session data discarded.')
+                return
+            if choice == '1':
+                patient = patients.register_patient(
+                    input('Patient ID: '),
+                    input('Patient name: '),
+                )
+                print(f'Patient registered: {patient.patient_id}: '
+                      f'{patient.name}')
+            elif choice == '2':
+                patient = patients.find_patient(input('Patient ID: '))
+                print(f'Patient found: {patient.patient_id}: {patient.name}')
+            elif choice == '3':
+                practitioner = practitioners.register_practitioner(
+                    input('Practitioner ID: '),
+                    input('Practitioner name: '),
+                    input('Specialty: '),
+                )
+                print(f'Practitioner registered: '
+                      f'{practitioner.practitioner_id}: '
+                      f'{practitioner.name}, {practitioner.specialty}')
+            elif choice == '4':
+                practitioner = practitioners.find_practitioner(
+                    input('Practitioner ID: '),
+                )
+                print(f'Practitioner found: '
+                      f'{practitioner.practitioner_id}: '
+                      f'{practitioner.name}, {practitioner.specialty}')
+            elif choice == '5':
+                appointment = appointments.book_appointment(
+                    input('Appointment ID: '),
+                    input('Patient ID: '),
+                    input('Practitioner ID: '),
+                    parse_date_time(input('Date/time [YYYY-MM-DD HH:MM]: ')),
+                )
+                print(f'Booked: {format_appointment(appointment)}')
+            elif choice == '6':
+                appointment = appointments.cancel_appointment(
+                    input('Appointment ID: '),
+                )
+                print(f'Cancelled: {format_appointment(appointment)}')
+            elif choice == '7':
+                appointment = appointments.find_appointment(
+                    input('Appointment ID: '),
+                )
+                print(f'Found: {format_appointment(appointment)}')
+            elif choice == '8':
+                practitioner_id = input('Practitioner ID: ')
+                status = parse_status(input(
+                    'Status filter [scheduled/cancelled/completed, '
+                    'blank = all]: ',
+                ))
+                results = appointments.list_practitioner_appointments(
+                    practitioner_id,
+                    status,
+                )
+                for appointment in results:
+                    print(format_appointment(appointment))
+                print(f'{len(results)} appointment(s) found.')
+            else:
+                print('Unknown choice. Choose a number from 0 to 8.')
+        except (ValueError, LookupError) as error:
+            print(f'Error: {error}')
