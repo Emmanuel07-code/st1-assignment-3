@@ -83,7 +83,7 @@ Cancellation changes the status to CANCELLED and keeps the same object in the st
 | FP-03 | queries.py | Repeated calls equal but not the same list; same objects | Passed | tests/test_queries.py |
 | FR-09, FR-07 | services.py list_practitioner_appointments | Cancelled A1 still listed, ordered before A2 | Passed | tests/test_services.py |
 | FR-09 | services.py | Known with none: []; unknown: LookupError; text status / blank ID: ValueError | Passed | tests/test_services.py |
-| Full suite | project/ | `python -m pytest -q` | 60 passed (47 earlier + 13 new) | screenshot (kept by the team) |
+| Full suite | project/ | `python -m pytest -q` | 63 passed (47 earlier + 13 query/listing + 3 workflow) | screenshot (kept by the team) |
 
 
 ## D. Integrated console and workflow evidence
@@ -92,7 +92,7 @@ Cancellation changes the status to CANCELLED and keeps the same object in the st
 |---|---|---|---|---|
 | UI-01 full menu workflow | `python main.py --interactive` in project/: register P1, D1, D2; book A1 (D1, 2026-10-01 09:00); same D1 time; A2 with D2 same time; cancel A1; find A1; list D1 (blank); list D1 scheduled; book A3 in freed slot; list D1; 0 | Conflict rejected; D2 allowed; A1 kept as cancelled; lists ordered; freed slot booked; normal exit | As expected. Final D1 list: A1 cancelled, A3 scheduled, `2 appointment(s) found.` | screenshot (kept by the team) |
 | UI-02 invalid-input recovery | Duplicate P1, blank patient ID, unknown D9, `not a date`, `2026-02-30 09:00`, status `pending`, repeated cancel of A1, choice `99` | `Error: ...` or `Unknown choice...` and the menu returns | Each error shown; next action (e.g. find P1, book A3) succeeded; A1 stayed CANCELLED | screenshot (kept by the team) |
-| Automated service workflow | tests/test_services.py listing tests | Book, cancel, list, filter, errors | 60 passed | screenshot (kept by the team) |
+| Automated service workflow | tests/test_workflows.py (3 tests: full booking workflow; rejected requests keep stored records; repeated cancel and invalid status) plus the listing tests in tests/test_services.py | Book, conflict rejected with state unchanged, other practitioner allowed, cancel keeps history, filter, freed slot booked; duplicate/unknown IDs rejected without changing records | `python -m pytest -q` in project/: 63 passed | tests/test_workflows.py |
 
 Include registration/find, booking, conflict rejection, different-practitioner booking, cancellation, retrieval, listing/filtering, freed slot and exit; duplicate/unknown/blank IDs, malformed/impossible date, invalid status, unknown choice and repeated cancellation. Identify before/after state and subsequent successful action.
 
@@ -143,7 +143,11 @@ Issues and bounded branches: Branch feature/stage9-queries (commits 3f03c16, 31a
 PR/diff and another-member human reviewer: Stage 9 PR #9 merged directly as 5b31a55. Merging directly was approved by our tutor; the team discussed and reviewed the changes together in person before upload.
 Review responses and Copilot comparison: Team review and Copilot both found no problems; tests confirm (E).
 Integrated common Stage 9 SHA: 5b31a55 (main, Merge pull request #9)
+<<<<<<< HEAD
 Full regression command, working directory, actual count/result and evidence: python -m pytest -q in project/: 60 passed. screenshot (kept by the team)
+=======
+Full regression command, working directory, actual count/result and evidence: `python -m pytest -q` in project/: 63 passed (60 before tests/test_workflows.py was added). screenshot (kept by the team)
+>>>>>>> origin/main
 README run instructions and scope/limitations: [README.md](../README.md), [project/README.md](../project/README.md)
 Unresolved issues and support/action: None.
 UG common candidate / PG future branch plan: UG-only group; 5b31a55 is our common candidate for Stage 12. Stages 10/11 not applicable.

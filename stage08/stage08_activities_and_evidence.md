@@ -190,12 +190,15 @@ Result — accepted, revised or rejected / reason / behaviour-preservation concl
 
 Issues for both defects / refactor scope and owners: F8-01 (practitioner conflict), F8-02 (cancelled lookup) and the refactor (magic string in has_practitioner_conflict) are tracked in this record and in the Stage 8 pull request. Owner: Emmanuel Cadman.
 Branch / prepared, repair and refactor checkpoints: debug/stage08. Prepared: 7eadcbc (see B). Repairs: 03714c7 (see C/D). Refactor: a1edcd8 (see H).
-PR link and another member's reviewer identity: [complete]
-Key human feedback, difference from Copilot findings and response/outcome: [complete]
-Actual review approval / merge evidence: [complete]
-Integrated code SHA and team pull/retest command / working directory / result: [complete]
-Evidence-only later SHA / explanation if different: [complete or not applicable]
-Each member's substantive contribution and artefact: [complete]
+PR link and another member's reviewer identity: [PR #8](https://github.com/Emmanuel07-code/st1-assignment-3/pull/8), debug/stage08 → main. Reviewer: Tanveer Uppal and Tanzir Ahon looked over the PR; no written GitHub review.
+Key human feedback, difference from Copilot findings and response/outcome: No written comments and no changes requested. The Copilot findings and our human decisions are in F.
+Actual review approval / merge evidence: GitHub showed no conflicts with main. Emmanuel merged PR #8 on 8 Nov 2026, as our tutor allowed for the repository owner when there are no conflicts. Merge commit 070801a "Merge pull request #8 from Emmanuel07-code/debug/stage08". No formal GitHub approval was given.
+Integrated code SHA and team pull/retest command / working directory / result: 070801a (main). `git switch main`, `git pull`, `python -m pytest -q` in project/. Emmanuel: fast-forward 99f074a..070801a, 47 passed in 0.07s (screenshot). Tanveer: fast-forward 99f074a..070801a, 47 passed in 0.40s (screenshot). Tanzir: not recorded.
+Evidence-only later SHA / explanation if different: The final record-only PR (the latest commit on main) adds the review, team results and contributions to this record. No code changed after 070801a.
+Each member's substantive contribution and artefact:
+- Emmanuel Cadman: baseline check, human-first hypotheses, both Copilot prompts and decisions, regression tests, both repairs (03714c7), refactor (a1edcd8), this record, PR #8 and merge (070801a).
+- Tanveer Uppal: pulled main after the merge and retested (47 passed, screenshot); looked over PR #8.
+- Tanzir Ahon: looked over PR #8.
 
 ## J. Required reflections
 
@@ -253,12 +256,12 @@ Response: Reproduce first, write the hypothesis before using Copilot, fix only w
 - [x] Both human hypotheses recorded before Copilot; actual suggestions evaluated with evidence.
 - [x] Supported causes and minimal repairs explained; focused and full regression results recorded.
 - [x] One genuine refactor verified under passing before/after tests.
-- [ ] Human PR review, feedback resolution and integrated retest recorded.
+- [x] Human PR review, feedback resolution and integrated retest recorded.
 - [x] Tutorial, three reflections and ten formative responses complete.
 - [x] Local recovery metadata excluded from submitted source.
-- [ ] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
+- [x] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
 
 Verified integrated code SHA / result: see I.
-Submitted SHA and evidence-only difference if any: [complete]
-Unresolved issues or incomplete checks / owner / next action: [complete]
-Handover note: [complete]
+Submitted SHA and evidence-only difference if any: Integrated code SHA 070801a. The submitted SHA is the latest commit on main, which only adds record and README updates after 070801a.
+Unresolved issues or incomplete checks / owner / next action: None in the code. Remaining record items (review feedback, teammates' pull results and contributions) are added by Emmanuel when received.
+Handover note: Stage 9 starts from main at 070801a, where the full suite gives 47 passed. Both Stage 8 defects are fixed and protected by tests/test_regressions.py, which must be kept.
