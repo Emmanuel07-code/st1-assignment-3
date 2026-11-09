@@ -143,7 +143,7 @@ Issues and bounded branches: Branch feature/stage9-queries (commits 3f03c16, 31a
 PR/diff and another-member human reviewer: Stage 9 PR #9 merged directly as 5b31a55. Merging directly was approved by our tutor; the team discussed and reviewed the changes together in person before upload.
 Review responses and Copilot comparison: Team review and Copilot both found no problems; tests confirm (E).
 Integrated common Stage 9 SHA: 5b31a55 (main, Merge pull request #9)
-Full regression command, working directory, actual count/result and evidence: `python -m pytest -q` in project/: 60 passed. screenshot (kept by the team)
+Full regression command, working directory, actual count/result and evidence: python -m pytest -q in project/: 60 passed. screenshot (kept by the team)
 README run instructions and scope/limitations: [README.md](../README.md), [project/README.md](../project/README.md)
 Unresolved issues and support/action: None.
 UG common candidate / PG future branch plan: UG-only group; 5b31a55 is our common candidate for Stage 12. Stages 10/11 not applicable.
