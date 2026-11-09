@@ -322,7 +322,7 @@ Use links rather than copying GitHub history. Continue the Stage 6 workflow; no 
 | #2 FR-02, #3 FR-06/FR-07, #4 practitioner lookup (Stage 6 code and the Stage 7 tests) | feature/stage6-services | PR #1 | TanveerUppal (approved); Tanzir1718 commented | Lookups reuse the data store and raise LookupError when not found; cancellation uses Appointment.cancel(), keeping the rule in the domain class. Later: the team review was missing from the Stage 6 record. | Approved and merged into main as 424c524 by Tanzir1718. |
 | PR #1 was reverted on main by mistake | revert-1-feature/stage6-services | PR #5 | No review | Reverted because the team review was missing from the Stage 6 record | Merged as d450a0a by Tanzir1718. This also removed the Stage 6 code and tests from main. |
 | Restore the Stage 6 work | revert-5-revert-1-feature/stage6-services | PR #6 | Review requested from TanveerUppal, not given before merge | Not applicable | Merged by Emmanuel as 84f40f2. It adds no new code, only re-applies the already approved PR #1, and the team needed it on main before starting Stage 8. Full suite 45 passed afterwards (see J). |
-| Stage 7 testing record | feature/stage7-testing-record | [link to add] | [complete] | [complete] | [complete] |
+| Stage 7 testing record and Stage 6 review evidence (records and README only, no code) | feature/stage7-testing-record | [PR #7](https://github.com/Emmanuel07-code/st1-assignment-3/pull/7) | TanveerUppal and Tanzir1718 looked over it; no GitHub approval | No written comments; no changes requested | Merged into main as 99f074a on 6 Nov after our tutor confirmed in the tutorial that it could be merged, since GitHub showed no conflicts. |
 
 ## M Contribution Evidence
 
@@ -330,9 +330,9 @@ Record actual work in test design, implementation, review, traceability, diagnos
 
 | Member | Actual contribution | Evidence link |
 |---|---|---|
-| Emmanuel Cadman (Emmanuel07-code) | Brought tests/test_domain.py and tests/test_services.py into the project, ran the full suite, single tests and a reordered run, answered tutorial Activities 1 to 4, the exit question, K and the formative questions (N), assigned the TEST IDs and checked the traceability tables (B to G), and managed the GitHub branch, commits and PR. | PR #1, commit ede66ac; Stage 7 PR [link to add] |
-| Tanveer Uppal (TanveerUppal) | [complete] | [complete] |
-| Tanzir Ahon (Tanzir1718) | [complete] | [complete] |
+| Emmanuel Cadman (Emmanuel07-code) | Brought tests/test_domain.py and tests/test_services.py into the project, ran the full suite, single tests and a reordered run, answered tutorial Activities 1 to 4, the exit question, K and the formative questions (N), assigned the TEST IDs and checked the traceability tables (B to G), and managed the GitHub branch, commits and PR. | PR #1, commit ede66ac; Stage 7 [PR #7](https://github.com/Emmanuel07-code/st1-assignment-3/pull/7) |
+| Tanveer Uppal (TanveerUppal) | Reviewed and approved PR #1, which added the Stage 7 test files, on 3 and 5 Nov; pulled main and ran the full suite (45 passed); looked over PR #7. | [PR #1](https://github.com/Emmanuel07-code/st1-assignment-3/pull/1) review; test-run screenshot |
+| Tanzir Ahon (Tanzir1718) | Commented on PR #1 and merged it into main (424c524); looked over PR #7. | [PR #1](https://github.com/Emmanuel07-code/st1-assignment-3/pull/1) |
 
 ## N Formative Questions
 
