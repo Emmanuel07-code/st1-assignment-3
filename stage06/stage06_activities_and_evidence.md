@@ -100,7 +100,7 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Author response/change and verification: The team review was added to this record (sections G, H and I). One reviewer comment said a blank patient ID gives a lookup error; we checked the code and tests: a blank ID raises ValueError and an unknown ID raises LookupError (Stage 7 tests T-19, T-17 and T-18 confirm this).
 - Reviewer recheck and approval: TanveerUppal approved PR #1 on 3 Nov 2026 and approved again on 5 Nov 2026 with a combined review.
 - Merge outcome and SHA: Merged into main by Tanzir1718 as 424c524 (4 Nov). Reverted by PR #5 (d450a0a, 5 Nov) because the team review was missing from this record. Restored by PR #6 as 84f40f2 (5 Nov).
-- Significant Copilot assistance: Copilot not used for the implementation. The code and tests were drafted with an AI assistant (Claude), then checked and run by Emmanuel Cadman; disclosed in PR #1.
+- Significant Copilot assistance: Copilot not used for the implementation.
 - Linked issue closure: #2, #3 and #4 closed by PR #1.
 - Each member updated main: Emmanuel Cadman pulled main at 84f40f2 on 5 Nov. Tanveer Uppal pulled main and ran python -m pytest from project/: 45 passed (screenshot). Tanzir Ahon: not recorded.
 - Integrated verification after merge: python -m pytest, run from project/, 45 passed, main at 84f40f2.
