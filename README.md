@@ -8,10 +8,10 @@ Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves 
 - Group and tutorial: Group 4, Computer Lab 09 (Friday 08:30–10:30)
 - Member names, GitHub usernames and UG/PG cohorts: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG)
 - Shared repository URL: https://github.com/Emmanuel07-code/st1-assignment-3
-- Latest completed stage: Stage 9
-- Verified code SHA: [complete after merge]
-- Test command, working directory and observed result: python -m pytest, run from project/, 60 passed
-- Final submitted SHA, if different from tested code SHA: [complete; explain evidence-only changes]
+- Latest completed stage: Stage 12 (release v1.0)
+- Verified code SHA: 29deede
+- Test command, working directory and observed result: python -m pytest -q, run from project/, 63 passed
+- Final submitted SHA, if different from tested code SHA: the latest commit on main. It only adds the Stage 12 record and this README update after 29deede; no code or tests changed.
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
 
