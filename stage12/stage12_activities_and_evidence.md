@@ -3,17 +3,17 @@
 BLANK student response template. Supplied from the beginning in stage12/ in your EXISTING repository; complete it only when you reach Stage 12 after the previous applicable stage is integrated, verified and recorded; preserve project/, tests, earlier records and Git history. UG/common and PG/extended scope must be explicit. Use concise results and versioned links, not copied logs or source. No staff answers or fabricated approvals.
 
 Group/tutorial: Group 4, Computer Lab 09 (Friday 08:30–10:30)
-Members and UG/PG applicability: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG). UG-only group: common scope only. Stages 10 and 11 are not applicable, to be done by postgraduates only.
+Members and UG/PG applicability: Emmanuel Cadman (Emmanuel07-code, UG); Tanveer Uppal (TanveerUppal, UG); Tanzir Ahon (Tanzir1718, UG). UG-only group: common scope only. Stages 10 and 11 are not applicable (postgraduate only); their templates are kept unchanged.
 
 
 ## A Release scope and starting SHA
 
 Release label/version and requirements baseline: SmartCare common UG release 1.0. SmartCare A3 Requirements Baseline 2026, revision 2.
-Common starting SHA / branch / applicable members: fdace4b (main, Merge pull request #10). Its project/ code is the same as the Stage 9 code SHA 5b31a55 (PR #9); PR #10 only added the Stage 9 record. All three members.
+Common starting SHA / branch / applicable members: 29deede (main, Merge pull request #12). The application code is the same as the Stage 9 code SHA 5b31a55 (PR #9); later PRs #10–#12 added records and tests/test_workflows.py (3 workflow tests) only. All three members.
 PG starting SHA / branch / applicable members or not applicable: Not applicable. UG-only group.
-Working-state review and approved integration: Stages 6 to 9 are merged into main through PRs #1, #6, #7, #8, #9 and #10. A fresh clone of main at fdace4b has a clean working tree and the full suite passes (see C).
-Protected common candidate and PG differences: The common candidate is the code at 5b31a55. No PG work exists, so there are no PG differences.
-Feature freeze / owner / verifier: Feature freeze from fdace4b: no new features, only documentation and record changes. Owner: Tanveer Uppal. Verifier: [complete: name of another member].
+Working-state review and approved integration: Stages 6 to 9 are merged into main through PRs #1, #6, #7, #8, #9, #10, #11 and #12. A fresh clone of main at 29deede has a clean working tree and the full suite passes (see C).
+Protected common candidate and PG differences: The common candidate is main at 29deede (application code unchanged since 5b31a55). No PG work exists, so there are no PG differences.
+Feature freeze / owner / verifier: Feature freeze from 29deede: no new features, only documentation and record changes. Owner: Tanveer Uppal. Verifier: Team members.
 
 
 ## B Requirements and release readiness matrix
@@ -24,17 +24,17 @@ Tutorial activity 2 and actual readiness matrix. Add exact requirement/acceptanc
 
 | Release claim / requirement / scope | Evidence | Location/link and SHA | Reviewer | Sufficient? | Gap/action |
 |---|---|---|---|---|---|
-| Cancellation history works | Tests T-32, test_f8_02_cancelled_appointment_can_still_be_found, test_listing_default_includes_cancelled_history; console run step 6 (D) | tests/test_services.py, tests/test_regressions.py at fdace4b | [complete] | Yes | None |
-| Architecture responsibilities are appropriate | Code review in E: domain rules, store, services, pure query, console | project/smartcare/ at fdace4b | [complete] | Yes | None |
+| Cancellation history works | Tests T-32, test_f8_02_cancelled_appointment_can_still_be_found, test_listing_default_includes_cancelled_history; console run step 6 (D) | tests/test_services.py, tests/test_regressions.py at 29deede | [Tanveer] | Yes | None |
+| Architecture responsibilities are appropriate | Code review in E: domain rules, store, services, pure query, console | project/smartcare/ at 29deede | [Tanveer] | Yes | None |
 | Rescheduling is safe — PG only | Not applicable | Not applicable | Not applicable | Not applicable | UG-only group |
-| AI use is responsible — common recheck / PG assurance | Copilot decisions recorded in Stages 6–9; final check in E | stage06–stage09 records | [complete] | Yes | PG assurance not applicable |
-| System is maintainable | Small focused methods, docstrings, type hints, 60 meaningful tests, README | project/ at fdace4b | [complete] | Yes | Small debt items in G |
-| FR-01–03 register/find and validation | T-01 to T-26, T-38 to T-41 | tests/test_domain.py, tests/test_services.py, tests/test_starter.py | [complete] | Yes | None |
-| FR-04–05 booking/conflict rules | T-27 to T-30, T-42 to T-44, test_f8_01_same_practitioner_same_time_is_a_conflict | tests/test_services.py, tests/test_starter.py, tests/test_regressions.py | [complete] | Yes | None |
-| FR-06–08 cancellation/history/find | T-11 to T-14, T-31 to T-37, T-45, test_f8_02 | tests/test_domain.py, tests/test_services.py, tests/test_regressions.py | [complete] | Yes | None |
-| FR-09 and QRY/FP listing/filter/order/purity | tests/test_queries.py (8 tests) and 5 listing tests | tests/test_queries.py, tests/test_services.py | [complete] | Yes | None |
-| UI full console sequence and error recovery | Manual console run (D); Stage 9 section D | `python main.py --interactive` at fdace4b | [complete] | Yes | No automated console tests (G) |
-| Session-only scope / FR-10 retired | Store is in memory only; README states data is lost on exit | data_store.py, project/README.md | [complete] | Yes | None |
+| AI use is responsible — common recheck / PG assurance | Copilot decisions recorded in Stages 6–9; final check in E | stage06–stage09 records | [TEAM] | Yes | PG assurance not applicable |
+| System is maintainable | Small focused methods, docstrings, type hints, 63 meaningful tests, README | project/ at 29deede | [TEAM] | Yes | Small debt items in G |
+| FR-01–03 register/find and validation | T-01 to T-26, T-38 to T-41 | tests/test_domain.py, tests/test_services.py, tests/test_starter.py | [TEAM] | Yes | None |
+| FR-04–05 booking/conflict rules | T-27 to T-30, T-42 to T-44, test_f8_01_same_practitioner_same_time_is_a_conflict | tests/test_services.py, tests/test_starter.py, tests/test_regressions.py | [TEAM] | Yes | None |
+| FR-06–08 cancellation/history/find | T-11 to T-14, T-31 to T-37, T-45, test_f8_02 | tests/test_domain.py, tests/test_services.py, tests/test_regressions.py | [TEAM] | Yes | None |
+| FR-09 and QRY/FP listing/filter/order/purity | tests/test_queries.py (8 tests), 5 listing tests and tests/test_workflows.py (3 tests) | tests/test_queries.py, tests/test_services.py | [TEAM] | Yes | None |
+| UI full console sequence and error recovery | Manual console run (D); Stage 9 section D; service workflow in tests/test_workflows.py | `python main.py --interactive` at 29deede | [TEAM] | Yes | No automated console tests (G) |
+| Session-only scope / FR-10 retired | Store is in memory only; README states data is lost on exit | data_store.py, project/README.md | [TEAM] | Yes | None |
 | PG RES and assurance integration | Not applicable | Not applicable | Not applicable | Not applicable | UG-only group |
 
 
@@ -42,11 +42,11 @@ Tutorial activity 2 and actual readiness matrix. Add exact requirement/acceptanc
 
 | Suite/scope | Environment/version | Working directory and command | Tested SHA | Actual result | Evidence link |
 |---|---|---|---|---|---|
-| Complete common | Python 3.13, pytest | project/, `python -m pytest -q` | fdace4b | 60 passed, 0 failed | screenshot (kept by the team) |
+| Complete common | Python 3.13, pytest | project/, `python -m pytest -q` | 29deede | 63 passed, 0 failed | screenshot (kept by the team) |
 | Complete PG if applicable | Not applicable | Not applicable | Not applicable | Not applicable | Not applicable |
 | Affected focused checks after correction | Not applicable: no code was changed in Stage 12 | Not applicable | Not applicable | Not applicable | Not applicable |
-| Full integrated recheck | Fresh clone of main | project/, `python -m pytest -q` | fdace4b | 60 passed, 0 failed | screenshot (kept by the team) |
-Prior assertions preserved / reviewed test diff: Yes. Since Stage 7 (45 tests), Stage 8 added 2 regression tests and Stage 9 added 13 tests. No earlier test was removed or weakened: Stage 8 and 9 diffs to tests/ only add lines.
+| Full integrated recheck | Fresh clone of main | project/, `python -m pytest -q` | 29deede | 63 passed, 0 failed | screenshot (kept by the team) |
+Prior assertions preserved / reviewed test diff: Yes. Since Stage 7 (45 tests), Stage 8 added 2 regression tests and Stage 9 added 16 tests (13 query/listing + 3 workflow). No earlier test was removed or weakened: Stage 8 and 9 diffs to tests/ only add lines.
 Remaining failure / limitation: None failing. Limitations are listed in G.
 
 
@@ -54,7 +54,7 @@ Remaining failure / limitation: None failing. Limitations are listed in G.
 
 | Demo step | Synthetic setup/input | Expected requirement | Observed result | Evidence/link |
 |---|---|---|---|---|
-| Problem and stakeholders | Not applicable (spoken) | A clinic needs to register patients and practitioners, book and cancel appointments and see a practitioner's schedule. Stakeholders: reception staff, practitioners, patients. | Explained in the demo | [complete] |
+| Problem and stakeholders | Not applicable (spoken) | A clinic needs to register patients and practitioners, book and cancel appointments and see a practitioner's schedule. Stakeholders: reception staff, practitioners, patients. | Explained in the demo | [NA] |
 | Register and find Patient and two Practitioners | Options 1–4: P1 Alex Example; D1 Taylor Example, General practice; D2 Jordan Example, Cardiology | FR-01, FR-02, FR-03 | Each registered and found with the correct name and specialty | screenshot (kept by the team) |
 | Valid booking | Option 5: A1, P1, D1, 2026-10-01 09:00 | FR-04 | `Booked: A1: P1 with D1, 2026-10-01 09:00, scheduled` | screenshot (kept by the team) |
 | Same practitioner exact-time conflict rejected | Option 5: AX, P1, D1, 2026-10-01 09:00 | FR-05, AC-04.1 | `Error: Practitioner already has a SCHEDULED appointment at this time`; menu returned | screenshot (kept by the team) |
@@ -91,7 +91,7 @@ PG demonstrations through service/tests or not applicable: Not applicable. UG-on
 
 | AI claim | Affected requirement/code | Human check | Accept/Modify/Reject and reason | Actual outcome/action or no change |
 |---|---|---|---|---|
-| Stage 9: "No problems found" in queries.py, services.py and console.py | QRY-01–04, FP-01–03, FR-09, UI-01–02 | Full suite and checks that the tests fail when the tie-break or purity is broken on purpose | Accept with caution: Copilot did not run any code | No change; 60 passed |
+| Stage 9: "No problems found" in queries.py, services.py and console.py | QRY-01–04, FP-01–03, FR-09, UI-01–02 | Full suite and checks that the tests fail when the tie-break or purity is broken on purpose | Accept with caution: Copilot did not run any code | No change; 63 passed |
 | Stage 8: F8-01 "wrong field compared" | FR-05, data_store.has_practitioner_conflict | Inspected the code: the fields were right, the `!=` operator was wrong | Modify: right place, wrong reason | Fixed `!=` to `==` in 03714c7 |
 | Stage 7: mocked repeated-cancellation test | FR-06, AC-05.3 | Ran it: AttributeError, used methods our code does not have | Reject | Not kept; real tests T-12 and T-33 used |
 Access route or approved equivalent / limitations: GitHub Copilot Chat in PyCharm (Stages 7–8) and VS Code (Stage 9), asked to reply in chat only, without editing files or running commands.
@@ -102,17 +102,17 @@ Available AI evidence and missing evidence honestly disclosed: Prompts and decis
 
 | README item | Location | Verifier | Result/gap |
 |---|---|---|---|
-| Purpose and included common/PG scope | README.md, project/README.md | [complete] | Present. Common UG scope. |
-| Out-of-scope capabilities and known limitations | project/README.md | [complete] | Present: session-only, no PG rescheduling, no age/duration/past-date rules |
-| Confirmed teaching Python version and dependency installation | project/README.md | [complete] | Present: Python 3.13, pytest 8.3.5, `python -m pip install -r requirements-dev.txt` |
-| Working directory / demo / interactive / test commands | README.md, project/README.md | [complete] | Present: run from project/, `python main.py`, `python main.py --interactive`, `python -m pytest` |
-| Repository structure and architecture responsibilities | README.md, project/README.md | [complete] | Present |
-| Responsible AI summary / synthetic-data rule | README.md | [complete] | Present: Copilot is the nominated assistant; synthetic data only |
-| Release label/version and SHA links | README.md group index | [complete] | Gap found: the verified SHA line still said "[complete after merge]". Fixed in this commit to 5b31a55 / fdace4b. |
+| Purpose and included common/PG scope | README.md, project/README.md | [TEAM] | Present. Common UG scope. |
+| Out-of-scope capabilities and known limitations | project/README.md | [TEAM] | Present: session-only, no PG rescheduling, no age/duration/past-date rules |
+| Confirmed teaching Python version and dependency installation | project/README.md | [TEAM] | Present: Python 3.13, pytest 8.3.5, `python -m pip install -r requirements-dev.txt` |
+| Working directory / demo / interactive / test commands | README.md, project/README.md | [TEAM] | Present: run from project/, `python main.py`, `python main.py --interactive`, `python -m pytest` |
+| Repository structure and architecture responsibilities | README.md, project/README.md | [TEAM] | Present |
+| Responsible AI summary / synthetic-data rule | README.md | [TEAM] | Present: Copilot is the nominated assistant; synthetic data only |
+| Release label/version and SHA links | README.md group index | [TEAM] | Gap found: the verified SHA line still said "[complete after merge]". Fixed in this commit to 29deede. |
 Root README index and project/README verified: Yes, both open from the root and link correctly.
-Fresh clone or extracted ZIP / candidate identity: Fresh clone of https://github.com/Emmanuel07-code/st1-assignment-3, main at fdace4b.
+Fresh clone or extracted ZIP / candidate identity: Fresh clone of https://github.com/Emmanuel07-code/st1-assignment-3, main at 29deede.
 Verifier and clean environment / actual version: [complete: name], new folder with Python 3.13 and pytest.
-Setup/run/test commands and observed results: `cd project`, `python main.py` printed the A1 demo booking and the session-only message; `python -m pytest -q`: 60 passed.
+Setup/run/test commands and observed results: `cd project`, `python main.py` printed the A1 demo booking and the session-only message; `python -m pytest -q`: 63 passed.
 Missing local file or setup gap / remedy and recheck: None. All needed files are tracked; .gitignore excludes .venv, caches and Stage 8 working files.
 
 
@@ -140,26 +140,27 @@ PG assurance residual risks / owner / status or not applicable: Not applicable. 
 
 | Requirement/claim | Reproduction/observation | Impact/severity | Owner/action | Corrective diff | Focused/full recheck | Residual limit |
 |---|---|---|---|---|---|---|
-| README release SHA (F) | Root README "Verified code SHA" said "[complete after merge]" | Low: release identity unclear | Tanveer Uppal: update the line | README.md: verified SHA set to 5b31a55 (code) / fdace4b (main) | README reread; no code changed, so tests not affected | None |
-Justified no-change conclusion if no defect found: No code defect found. All 60 tests pass on a fresh clone and the full console demo works, so no code was changed in Stage 12.
+| README release SHA (F) | Root README "Verified code SHA" said "[complete after merge]" | Low: release identity unclear | Tanveer Uppal: update the line | README.md: verified SHA set to 29deede | README reread; no code changed, so tests not affected | None |
+| .gitignore excludes editor files | Last line read `.idea/.idea/` (a missing newline joined two lines), so `.idea/` folders were no longer ignored | Low: editor files could be committed by mistake | Tanveer Uppal: restore the line | .gitignore: `.idea/.idea/` changed back to `.idea/` | `git status` clean; tests not affected | None |
+Justified no-change conclusion if no defect found: No code defect found. All 63 tests pass on a fresh clone and the full console demo works, so no code was changed in Stage 12.
 Release blockers still open / status: None.
 
 
 ## I Git review and integration evidence
 
-Issue / PR / diff links and reviewed SHA: Stage 9 PR #9 (code, merged as 5b31a55) and PR #10 (record, merged as fdace4b). Stage 12 changes: stage12 record and README only.
+Issue / PR / diff links and reviewed SHA: Stage 9 PR #9 (code, merged as 5b31a55), PR #10 (Stage 9 record), PR #11 (Stage 6–8 records) and PR #12 (workflow tests, merged as 29deede). Stage 12 changes: stage12 record, README.md and .gitignore only.
 Independent reviewer / feedback / response: Merging directly was approved by our tutor; the team reviews changes together in person before upload. [complete: reviewer name and feedback]
-Integration commit / full recheck: fdace4b; fresh clone, 60 passed.
+Integration commit / full recheck: 29deede; fresh clone, 63 passed.
 Tracked and untracked file inspection / cleanliness: `git status` clean on a fresh clone. Local-only files (for example stage08/test.md) are untracked and not submitted.
 Secrets/staff material/caches/tool-metadata exclusion check: `git ls-files` shows no .venv, __pycache__, .env, Stage 8 utility or recovery files.
 Candidate recovery plan / known-good SHA: Known-good code SHA 5b31a55. If a later change breaks something, check it out or revert to it and rerun the tests.
-Named substantive contributions: Emmanuel Cadman: Stage 6 lookups and cancellation, Stage 7 tests and record, Stage 8 repairs and record. Tanveer Uppal: Stage 9 query, listing, console, tests, READMEs and record; Stage 12 record. Tanzir Ahon: [complete].
+Named substantive contributions: Emmanuel Cadman: Stage 6 lookups and cancellation, Stage 7 tests and record, Stage 8 repairs and record, Stage 9 workflow tests. Tanveer Uppal: Stage 9 query, listing, console, tests, READMEs and record; Stage 12 record. Tanzir Ahon: [complete].
 
 
 ## J Human release decision
 
-Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: **READY WITH DOCUMENTED LIMITATIONS**
-Approver / date / rationale and evidence: [complete: approver], [complete: date]. All common requirements are tested (60 passed), the demo works, and the limitations are written down in G and the README.
+Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS 
+Approver / date / rationale and evidence: [complete: Team], [complete: 9/11/26]. All common requirements are tested (63 passed), the demo works, and the limitations are written down in G and the README.
 What risks remain / conditions / owners: No automated console tests; session-only data. Both accepted and documented. Owner: the team.
 Can the team explain the system: Yes. Each member can explain the domain, store, services, query and console, and one test (D).
 Can a change be recovered: Yes. All work is in Git history with known-good SHA 5b31a55.
@@ -168,12 +169,12 @@ Common decision / PG decision where different: Common: ready with documented lim
 
 ## K Final tested release SHA
 
-Exact common tested SHA: fdace4b (main). Its project/ code is identical to 5b31a55.
+Exact common tested SHA: 29deede (main). Application code is identical to 5b31a55; only tests and records were added after it.
 Exact PG tested SHA or not applicable: Not applicable.
 Final submitted SHA / repository URL: The commit that adds this Stage 12 record [complete: SHA], https://github.com/Emmanuel07-code/st1-assignment-3
-Evidence-only later commit and difference explanation: The final commit only changes stage12/stage12_activities_and_evidence.md and README.md. No code or tests change.
+Evidence-only later commit and difference explanation: The final commit only changes stage12/stage12_activities_and_evidence.md, README.md and .gitignore. No code or tests change.
 Executable changes after testing and re-verification: None.
-Source ZIP name / SHA correspondence / extracted comparison: [complete: ZIP name], made with `git archive` from the final submitted commit, so it holds only tracked files. Extracted and checked: 60 passed.
+Source ZIP name / SHA correspondence / extracted comparison: [complete: ZIP name], made with `git archive` from the final submitted commit, so it holds only tracked files. Extracted and checked: 63 passed.
 
 
 ## L Submission package verification
@@ -193,19 +194,17 @@ Source ZIP name / SHA correspondence / extracted comparison: [complete: ZIP name
 - [x] Mixed-group common protection and candidate upload routing checked.
 - [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
 
-Confirmed assessment item/upload route: [complete]
-Deadline/timezone: [complete]
 Repository access arrangement: Public repository: https://github.com/Emmanuel07-code/st1-assignment-3
 Mixed-candidate upload arrangement: Not applicable. UG-only group.
-Oral/video recording/accessibility arrangements: [complete]
-Remaining administration or release dependency: [complete]
+Oral/video recording/accessibility arrangements: Not available
+Remaining administration or release dependency: Not available
 
 
 ## M Formative questions
 
 1. What is a release candidate?
 
-Response: A specific, tested version of the software that the team proposes to release, identified by an exact commit SHA. Ours is fdace4b.
+Response: A specific, tested version of the software that the team proposes to release, identified by an exact commit SHA. Ours is 29deede.
 
 2. What is feature freeze and why is it used?
 
@@ -213,7 +212,7 @@ Response: A point after which no new features are added, only fixes and document
 
 3. What is regression testing in a release context?
 
-Response: Rerunning all existing tests on the release candidate to make sure nothing that worked before is now broken. We ran all 60 tests on a fresh clone.
+Response: Rerunning all existing tests on the release candidate to make sure nothing that worked before is now broken. We ran all 63 tests on a fresh clone.
 
 4. What is a known limitation?
 
@@ -246,14 +245,14 @@ Response: AI can suggest code, tests and diagnoses quickly, but the engineer is 
 
 ## N Reflection viva and handover
 
-Strongest evidence SmartCare is ready: 60 passing tests traced to the requirements, plus a full console demo on a fresh clone.
+Strongest evidence SmartCare is ready: 63 passing tests traced to the requirements, plus a full console demo on a fresh clone.
 Weakest area: The console has no automated tests; it was only checked by hand.
 How AI use changed from Stage 1 to Stage 12: At first we were tempted to trust Copilot's answers. By Stages 7 and 8 we wrote our own idea first, then treated Copilot's output as a hypothesis and checked it with tests and code.
-Start doing — engineering and AI use: Write tests for the console, and ask Copilot for specific checks instead of general reviews.
-Stop doing — engineering and AI use: Leaving placeholder text and leftover comments until the end.
-Continue doing — engineering and AI use: Human idea first, small focused commits, and running the full suite after every change.
+Start doing engineering and AI use: Write tests for the console, and ask Copilot for specific checks instead of general reviews.
+Stop doing engineering and AI use: Leaving placeholder text and leftover comments until the end.
+Continue doing engineering and AI use: Human idea first, small focused commits, and running the full suite after every change.
 What worked / caused rework / future delivery improvement: Small branches per stage and regression tests worked well. The accidental revert of PR #1 in Stage 6 caused rework. Next time, protect main and complete records alongside the code.
-One paragraph — If AI can write code why do we still need software engineers: AI can write code quickly, but it does not know what the users actually need or whether its code is correct. In this project Copilot suggested a test that used methods our code did not have, and a diagnosis that pointed at the right line for the wrong reason. A software engineer turns needs into clear requirements, checks AI output against tests and evidence, makes the final decisions and is responsible for the result.
+One paragraph If AI can write code why do we still need software engineers: AI can write code quickly, but it does not know what the users actually need or whether its code is correct. In this project Copilot suggested a test that used methods our code did not have, and a diagnosis that pointed at the right line for the wrong reason. A software engineer turns needs into clear requirements, checks AI output against tests and evidence, makes the final decisions and is responsible for the result.
 
 | Preparation item | Own explanation and evidence link |
 |---|---|
@@ -269,13 +268,5 @@ One paragraph — If AI can write code why do we still need software engineers: 
 | FR-07 retained history test | test_cancelled_appointment_is_still_stored and test_listing_default_includes_cancelled_history. |
 | Actual AI change rejected/modified or honestly accepted with verification | Rejected Copilot's mocked test in Stage 7; modified its F8-01 diagnosis in Stage 8. |
 | Unresolved limitation / future production work | No persistence and no automated console tests. Production would need saving data, logins and console tests. |
-| Personal implementation contribution | [complete: each member] |
-| Personal test/review/design/integration contribution | [complete: each member] |
 | PG agentic change and rescheduling verification | Not applicable. UG-only group. |
 | PG responsible-AI risk/remediation or supported no finding | Not applicable. UG-only group. |
-
-Optional bounded-change practice only: validation rule, focused test, safe error-message change, explicit-input query or agreed status rule with test. Explain expected impact before editing, make a small change, run the test, and identify evidence to inspect if unsure. No live AI unless explicitly permitted. Preserve the submitted candidate.
-
-Practice question/change and reasoning: Not undertaken.
-Separate reflection / peer / common team viva evidence links and routing: [complete]
-No further coding stage. Later corrections use the published assessment process.
