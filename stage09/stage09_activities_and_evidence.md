@@ -114,7 +114,7 @@ Response: "No problems found in queries.py, services.py, or console.py." It said
 |---|---|---|---|---|---|
 | No problems found | Matches our tests and the manual console run (D) | None | Accept with caution: Copilot did not run anything, so its "no problems" is not proof on its own | No change | Full suite 60 passed, tests only fail when tie-break or purity is broken on purpose (C) |
 
-AI-use statement: 
+
 
 Responsibility check: explain how domain invariants, shared-store collections, service coordination, pure queries and console effects remain separate: Appointment.cancel() still guards status; the store only adds/finds/lists, the service validates and coordinates; the query only filters and sorts its inputs; only console.py reads input and prints.
 
